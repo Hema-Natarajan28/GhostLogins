@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GhostLogin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #101827;
+            color: white;
+            padding: 30px;
+        }
+        h1 { color: #63e6be; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #1e293b;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #475569;
+            text-align: left;
+        }
+        th { background: #334155; }
+        .HIGH { color: #ff6b6b; }
+        .MEDIUM { color: #ffd43b; }
+        .LOW { color: #63e6be; }
+    </style>
+</head>
+<body>
+    <h1>GhostLogin</h1>
+    <p>Suspicious Login Behavior Detector</p>
+    <h2>Login Activity</h2>
+    <table>
+        <tr>
+            <th>User</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Risk Score</th>
+            <th>Risk Level</th>
+            <th>Reason</th>
+        </tr>
+        {% for login in logins %}
+        <tr>
+            <td>{{ login.username }}</td>
+            <td>{{ login.timestamp }}</td>
+            <td>{{ "Success" if login.success else "Failed" }}</td>
+            <td>{{ login.risk_score }}</td>
+            <td class="{{ login.risk_level }}">
+                {{ login.risk_level }}
+            </td>
+            <td>{{ login.reasons }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
